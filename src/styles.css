@@ -33,7 +33,7 @@ header {
   border: 1px solid grey;
 }
 
-.main {
+.content {
   display: grid;
   grid-template-columns: min-content 1fr;
 }
@@ -47,9 +47,9 @@ header {
   background-color: ivory;
   border: 1px solid gray;
   border-top: 0;
-  width: 150px;
-  padding: 10px;
-  border-radius: 0 10px 10px 0px;
+  width: 20vw;
+  padding: 20px;
+  border-radius: 0 7px 7px 0px;
 }
 
 .userinfo {
@@ -89,4 +89,60 @@ header {
 }
 .project-list div:hover {
   background-color: lightgrey;
+}
+
+.main {
+  padding: 20px;
+  width: 55vw;
+  justify-self: center;
+}
+
+.tasks-title {
+  font-size: 30px;
+  border-bottom: 1px solid grey;
+  text-align: center;
+}
+
+.tasks {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  gap: 8px;
+  width: auto;
+}
+
+.task {
+  display: flex;
+  font-size: 18px;
+  gap: 10px;
+  width: auto;
+  box-shadow: 1px 1px 2px grey;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.task:hover {
+  background-color: lightgrey;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox:hover {
+  background-color: black;
+  border-radius: 50%;
+}
+
+.checkbox img {
+  width: 25px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
 }
