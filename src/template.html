@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Zed's Todo App</title>
+    <script src="//code.iconify.design/1/1.0.6/iconify.min.js"></script>
   </head>
   <body>
-    <header>
-      <h1>ZeDo</h1>
-    </header>
     <div class="content">
       <div class="sidebar">
         <div class="userinfo">
@@ -25,37 +23,126 @@
             <div>+</div>
           </div>
         </div>
+        <div class="archive">
+          <div>Archive</div>
+        </div>
       </div>
       <div class="main">
         <div class="tasks-title">Tasks</div>
         <div class="tasks">
           <div class="task">
             <div class="checkbox">
-              <img src="assets/round.png" alt="checkbox" />
-            </div>
-            <div>Do something</div>
-          </div>
-          <div class="task">
-            <div class="checkbox">
-              <img src="assets/round.png" alt="checkbox" />
-            </div>
-            <div>Do something</div>
-          </div>
-          <div class="task">
-            <div class="checkbox">
-              <img src="assets/round.png" alt="checkbox" />
-            </div>
-            <div>Do something</div>
-          </div>
-          <div class="task">
-            <div class="checkbox">
-              <img src="assets/round.png" alt="checkbox" />
+              <span
+                id="unchecked"
+                class="iconify"
+                data-icon="mdi:circle-outline"
+              >
+              </span>
+              <span
+                id="checked"
+                class="iconify"
+                data-icon="mdi:check-circle-outline"
+              ></span>
             </div>
             <div>Do something</div>
             <div class="actions">
-              <div>+</div>
-              <div>+</div>
-              <div>+</div>
+              <div>
+                <span class="iconify" data-icon="mdi:pencil-outline"></span>
+              </div>
+              <div>
+                <span class="iconify" data-icon="mdi:bin-outline"></span>
+              </div>
+
+              <div>
+                <span class="iconify" data-icon="tabler:archive"></span>
+              </div>
+            </div>
+          </div>
+          <div class="task">
+            <div class="checkbox">
+              <span
+                id="unchecked"
+                class="iconify"
+                data-icon="mdi:circle-outline"
+              >
+              </span>
+              <span
+                id="checked"
+                class="iconify"
+                data-icon="mdi:check-circle-outline"
+              ></span>
+            </div>
+            <div>Do something</div>
+            <div class="actions">
+              <div>
+                <span class="iconify" data-icon="mdi:pencil-outline"></span>
+              </div>
+              <div>
+                <span class="iconify" data-icon="mdi:bin-outline"></span>
+              </div>
+
+              <div>
+                <span class="iconify" data-icon="tabler:archive"></span>
+              </div>
+            </div>
+          </div>
+          <div class="task">
+            <div class="checkbox">
+              <span
+                id="unchecked"
+                class="iconify"
+                data-icon="mdi:circle-outline"
+              >
+              </span>
+              <span
+                id="checked"
+                class="iconify"
+                data-icon="mdi:check-circle-outline"
+              ></span>
+            </div>
+            <div>Do something</div>
+            <div class="actions">
+              <div>
+                <span class="iconify" data-icon="mdi:pencil-outline"></span>
+              </div>
+              <div>
+                <span class="iconify" data-icon="mdi:bin-outline"></span>
+              </div>
+
+              <div>
+                <span class="iconify" data-icon="tabler:archive"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="completed">
+          <div class="complete-title">Completed</div>
+          <div class="task">
+            <div class="checkbox">
+              <span
+                id="unchecked"
+                class="iconify"
+                data-icon="mdi:circle-outline"
+              >
+              </span>
+              <span
+                id="checked"
+                class="iconify"
+                data-icon="mdi:check-circle-outline"
+              ></span>
+            </div>
+            <div>Do something</div>
+            <div class="actions">
+              <div>
+                <span class="iconify" data-icon="mdi:pencil-outline"></span>
+              </div>
+              <div>
+                <span class="iconify" data-icon="mdi:bin-outline"></span>
+              </div>
+
+              <div>
+                <span class="iconify" data-icon="tabler:archive"></span>
+              </div>
             </div>
           </div>
         </div>
