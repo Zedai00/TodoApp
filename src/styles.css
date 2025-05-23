@@ -23,15 +23,6 @@ body {
   display: grid;
 }
 
-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background-color: lavenderblush;
-  border: 1px solid grey;
-}
-
 .content {
   display: grid;
   grid-template-columns: min-content 1fr;
@@ -43,7 +34,7 @@ header {
 }
 
 .sidebar {
-  background-color: ivory;
+  /* background-color: ivory; */
   border: 1px solid gray;
   border-top: 0;
   width: 20vw;
@@ -63,6 +54,10 @@ header {
   font-size: 20px;
   border-bottom: 1px solid grey;
   padding: 10px;
+}
+
+.userinfo > svg {
+  font-size: 60px;
 }
 
 .projects {
@@ -95,9 +90,9 @@ svg {
   border: 1px solid grey;
   cursor: pointer;
 }
+
 .project-list div:hover {
   transform: scale(1.05);
-  /* background-color: lightgrey; */
 }
 
 .archive {
