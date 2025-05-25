@@ -1,6 +1,17 @@
 import "./styles.css"
-import todo from "./modules/todo.js"
-import project from "./modules/project.js"
-import ui from "./modules/ui.js"
+import render from "./modules/render.js"
+import projectModel from "./modules/projectModel.js"
+
+const projects = projectModel()
+const DailyProject = projects.add("Daily")
+DailyProject.add("Hello")
+DailyProject.add("Hello")
+DailyProject.add("Hello")
+DailyProject.add("Hello")
+projects.add("Hello")
+projects.add("Bye")
+projects.setCurrentProject(DailyProject.id)
+
+render(projects)
 
 

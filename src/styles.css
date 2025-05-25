@@ -23,7 +23,7 @@ body {
   display: grid;
 }
 
-.content {
+.app {
   display: grid;
   grid-template-columns: min-content 1fr;
 }
@@ -95,6 +95,21 @@ svg {
   transform: scale(1.05);
 }
 
+.add-project-btn {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  font-size: 17px;
+}
+
+.add-project-btn > div {
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+  border: 1px solid grey;
+  cursor: pointer;
+}
+
 .archive {
   text-align: center;
   border-radius: 10px;
@@ -115,13 +130,13 @@ svg {
   flex-direction: column;
 }
 
-.tasks-title {
+.project-title {
   font-size: 30px;
   border-bottom: 1px solid grey;
   text-align: center;
 }
 
-.tasks {
+.tasks-container {
   margin-top: 40px;
   display: flex;
   flex-direction: column;
@@ -170,19 +185,19 @@ svg {
   cursor: pointer;
 }
 
-#checked {
+.checked {
   display: none;
 }
 
-.checkbox:hover #unchecked {
+.checkbox:hover .unchecked {
   display: none;
 }
 
-.checkbox:hover #checked {
+.checkbox:hover .checked {
   display: inline;
 }
 
-.complete-title {
+.completed-title {
   margin-top: 40px;
   font-size: 20px;
   border-bottom: 1px solid grey;
