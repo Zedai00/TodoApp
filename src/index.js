@@ -1,8 +1,8 @@
 import "./styles.css"
 import render from "./modules/render.js"
-import projectModel from "./modules/projectModel.js"
+import projects from "./modules/projectModel.js"
 
-const projects = projectModel()
+// const projects = projectModel
 const DailyProject = projects.add("Daily")
 DailyProject.add("Hello")
 DailyProject.add("Hello")

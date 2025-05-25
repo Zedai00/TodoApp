@@ -1,4 +1,7 @@
-function createTodoForm() {
+import projects from "./projectModel";
+import render from "./render";
+
+function createTodoForm(id) {
   const form = document.createElement("form");
   form.id = "todo-form";
 
@@ -43,12 +46,42 @@ function createTodoForm() {
 
   const submitBtn = document.createElement("button");
   submitBtn.type = "submit";
-  submitBtn.textContent = "Add Todo";
+  submitBtn.textContent = "Submit";
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault()
+    saveTodo(id, titleInput.value, descTextarea.value, dueDateInput.value, prioritySelect.value);
+    e.currentTarget.closest("dialog").close()
+    render()
+  })
   form.appendChild(submitBtn);
-
-  document.body.appendChild(form);
+  if (id) {
+    editForm(id, titleInput, descTextarea, dueDateInput, prioritySelect);
+  }
 
   return form;
+}
+
+function saveTodo(id, title, desc, dueDate, priority) {
+  if (id) {
+    const todo = projects.getCurrentProject().getTodo(id)
+    console.log(todo)
+    console.log(title)
+    todo.edit(title, desc, dueDate, priority)
+    console.log(todo)
+    console.log("h")
+    render()
+  } else {
+    projects.getCurrentProject().add(title, desc, dueDate, priority)
+    render()
+  }
+}
+
+function editForm(id, titleInput, descTextarea, dueDateInput, prioritySelect) {
+  const todo = projects.getCurrentProject().getTodo(id)
+  titleInput.value = todo.title;
+  descTextarea.value = todo.description;
+  dueDateInput.value = todo.dueDate;
+  prioritySelect.value = todo.priority;
 }
 
 function createCloseBtn(dialog) {
@@ -74,9 +107,9 @@ function createDialog() {
 export const dialogModel = (() => {
   let dialog = createDialog()
 
-  const getFormDialog = () => {
+  const getFormDialog = (id) => {
     clearDialog()
-    const todoForm = createTodoForm()
+    const todoForm = createTodoForm(id)
     todoForm.style.display = "flex"
     dialog.append(todoForm)
     return dialog

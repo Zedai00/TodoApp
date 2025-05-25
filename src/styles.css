@@ -110,6 +110,10 @@ svg {
   cursor: pointer;
 }
 
+.add-project-btn:hover {
+  transform: scale(1.05);
+}
+
 .archive {
   text-align: center;
   border-radius: 10px;
@@ -148,7 +152,8 @@ svg {
   flex: 1;
 }
 
-.task {
+.task,
+.add-task {
   display: flex;
   font-size: 18px;
   gap: 10px;
@@ -161,8 +166,14 @@ svg {
   align-items: center;
 }
 
-.task:hover {
+.task:hover,
+.add-task:hover {
   transform: scale(1.02);
+}
+
+.add-task {
+  justify-content: center;
+  align-items: center;
 }
 
 .checkbox {

@@ -1,4 +1,5 @@
 import { dialogModel } from "./dialogModel"
+import projects from "./projectModel"
 
 
 function createIcon(iconName, className) {
@@ -17,6 +18,7 @@ function createIcon(iconName, className) {
 function createTask(todo) {
   const task = document.createElement("div")
   task.classList.add("task")
+  task.id = todo.id
 
   const checkboxContainer = document.createElement("div")
   checkboxContainer.classList.add("checkbox")
@@ -33,10 +35,14 @@ function createTask(todo) {
   actionsDiv.classList.add("actions")
 
   const editAction = createIcon("mdi:pencil-outline", "edit-action")
-  editAction.addEventListener("click", () => {
-    dialogModel.getFormDialog().showModal();
+  editAction.addEventListener("click", (e) => {
+    dialogModel.getFormDialog(e.currentTarget.closest(".task").id).showModal();
   })
   const deleteAction = createIcon("mdi:bin-outline", "delete-action")
+  deleteAction.addEventListener("click", (e) => {
+    const todoId = e.currentTarget.closest('.task').id
+    projects.getCurrentProject().remove(todoId)
+  })
   const archiveAction = createIcon("tabler:archive", "archive-action")
 
   actionsDiv.append(editAction, deleteAction, archiveAction)
@@ -81,10 +87,24 @@ function createProjectTitle(project) {
   return projectTitleSection
 }
 
+function addTaskSection(project) {
+  const addTaskDiv = document.createElement("div")
+  addTaskDiv.classList.add("add-task");
+  addTaskDiv.textContent = "+ Add Task"
+
+  addTaskDiv.addEventListener("click", () => {
+    dialogModel.getFormDialog().showModal()
+  })
+
+  return addTaskDiv;
+}
+
 function createTasksSection(project) {
 
   const tasksSection = document.createElement("div")
   tasksSection.classList.add("tasks-container")
+
+
 
   const completedSection = createCompletedSection()
 
@@ -99,6 +119,8 @@ function createTasksSection(project) {
     }
 
   });
+  const addTaskBtn = addTaskSection(project)
+  tasksSection.append(addTaskBtn)
 
   return { tasksSection, completedSection }
 }

@@ -1,8 +1,9 @@
 import createSidebar from "./sidebarView.js"
 import createMainDiv from "./taskView.js"
 import { dialogModel } from "./dialogModel.js";
+import projects from "./projectModel.js"
 
-function render(projects) {
+function render() {
   const app = document.querySelector(".app");
   app.innerHTML = ""
   const sidebar = createSidebar(projects);

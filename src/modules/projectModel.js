@@ -1,3 +1,4 @@
+import render from "./render";
 import createTodo from "./todoModel";
 
 const project = (title) => {
@@ -8,6 +9,7 @@ const project = (title) => {
     if (!title) return;
     const newTodo = createTodo(title, description, dueDate, priority)
     todoList.push(newTodo)
+    render()
   };
 
   const remove = (todoId) => {
@@ -15,12 +17,17 @@ const project = (title) => {
     if (index !== -1) {
       todoList.splice(index, 1);
     }
+    render()
   };
 
-  return { id, title, todoList, add, remove };
+  const getTodo = (id) => {
+    return todoList.find(todo => todo.id === id)
+  }
+
+  return { id, title, todoList, add, remove, getTodo };
 };
 
-const projectModel = () => {
+const projectModel = (() => {
   const projectList = [];
   let currentProject = null;
 
@@ -56,6 +63,6 @@ const projectModel = () => {
   const getProjects = () => projectList;
 
   return { getProjects, add, remove, setCurrentProject, getCurrentProject };
-};
+})();
 
 export default projectModel;
