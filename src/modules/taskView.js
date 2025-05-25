@@ -1,3 +1,6 @@
+import { dialogModel } from "./dialogModel"
+
+
 function createIcon(iconName, className) {
   const iconDiv = document.createElement("div")
   iconDiv.classList.add(className)
@@ -30,6 +33,9 @@ function createTask(todo) {
   actionsDiv.classList.add("actions")
 
   const editAction = createIcon("mdi:pencil-outline", "edit-action")
+  editAction.addEventListener("click", () => {
+    dialogModel.getFormDialog().showModal();
+  })
   const deleteAction = createIcon("mdi:bin-outline", "delete-action")
   const archiveAction = createIcon("tabler:archive", "archive-action")
 
@@ -39,6 +45,7 @@ function createTask(todo) {
 
   return task
 }
+
 
 function createCompletedSection() {
   const completedContainer = document.createElement("div")
@@ -55,11 +62,23 @@ function createCompletedSection() {
 
 function createProjectTitle(project) {
 
+  const projectTitleSection = document.createElement("div")
+  projectTitleSection.classList.add("project-title")
+
+  const editProject = createIcon("mdi:pencil-outline", "edit-action")
+  editProject.addEventListener("click", () => {
+    projectTitle.contentEditable = true
+    projectTitle.focus(HTMLOptionElement)
+  })
+
   const projectTitle = document.createElement("div")
-  projectTitle.classList.add("project-title")
   projectTitle.textContent = project.title
 
-  return projectTitle
+  const deleteProject = createIcon("mdi:bin-outline", "delete-action")
+
+  projectTitleSection.append(editProject, projectTitle, deleteProject)
+
+  return projectTitleSection
 }
 
 function createTasksSection(project) {

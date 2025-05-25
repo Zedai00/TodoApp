@@ -1,12 +1,14 @@
 import createSidebar from "./sidebarView.js"
 import createMainDiv from "./taskView.js"
+import { dialogModel } from "./dialogModel.js";
 
 function render(projects) {
   const app = document.querySelector(".app");
   app.innerHTML = ""
   const sidebar = createSidebar(projects);
   const mainDiv = createMainDiv(projects.getCurrentProject())
-  app.prepend(sidebar, mainDiv)
+  const dialog = dialogModel.getDialog()
+  app.prepend(sidebar, mainDiv, dialog)
 }
 
 export default render
