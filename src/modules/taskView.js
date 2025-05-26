@@ -1,5 +1,6 @@
 import { dialogModel } from "./dialogModel"
 import projects from "./projectModel"
+import render from "./render"
 
 
 function createIcon(iconName, className) {
@@ -34,6 +35,7 @@ function createTaskInfo(todo) {
   return taskInfo
 }
 
+
 function createTask(todo) {
   const task = document.createElement("div")
   task.classList.add("task")
@@ -44,6 +46,11 @@ function createTask(todo) {
 
   const checkboxContainer = document.createElement("div")
   checkboxContainer.classList.add("checkbox")
+
+  checkboxContainer.addEventListener("click", () => {
+    todo.checked = true
+    render()
+  });
 
   const uncheckedBox = createIcon("mdi:circle-outline", "unchecked")
   const checkedBox = createIcon("mdi:check-circle-outline", "checked")
@@ -83,18 +90,73 @@ function createTask(todo) {
   return task
 }
 
+function createCompletedTask(todo) {
+  const task = document.createElement("div")
+  task.classList.add("task")
+  task.id = todo.id
+
+  const taskDiv = document.createElement("div")
+  taskDiv.classList.add("task-div")
+
+  const checkboxContainer = document.createElement("div")
+  checkboxContainer.classList.add("checkedBox")
+
+  const checkedBox = createIcon("mdi:check-circle-outline", "checked")
+  checkedBox.style.display = "block"
+
+  checkboxContainer.append(checkedBox)
+
+  const taskTitle = document.createElement("div")
+  taskTitle.textContent = todo.title
+  taskTitle.classList.add("task-title")
+
+  taskTitle.addEventListener("click", () => {
+    taskInfo.classList.toggle("hidden")
+  })
+
+  const actionsDiv = document.createElement("div")
+  actionsDiv.classList.add("actions")
+
+  const deleteAction = createIcon("mdi:bin-outline", "delete-action")
+  deleteAction.addEventListener("click", (e) => {
+    const todoId = e.currentTarget.closest('.task').id
+    projects.getCurrentProject().remove(todoId)
+  })
+  const archiveAction = createIcon("tabler:archive", "archive-action")
+
+  actionsDiv.append(deleteAction, archiveAction)
+
+  taskDiv.append(checkboxContainer, taskTitle, actionsDiv)
+  const taskInfo = createTaskInfo(todo)
+  taskInfo.classList.add("hidden")
+  task.append(taskDiv, taskInfo)
+
+  return task
+}
+
 
 function createCompletedSection() {
   const completedContainer = document.createElement("div")
   completedContainer.classList.add("completed")
 
+  completedContainer.addEventListener("click", () => {
+    completedTaskList.classList.toggle("hidden")
+    arrow.classList.toggle("rotated");
+  })
+
   const completedTitle = document.createElement("div")
   completedTitle.classList.add("completed-title")
-  completedTitle.textContent = "Completed"
 
-  completedContainer.append(completedTitle)
+  const arrow = createIcon("mdi:chevron-down", "arrow");
+  completedTitle.appendChild(arrow);
+  completedTitle.append("Completed")
 
-  return completedContainer
+  const completedTaskList = document.createElement("div")
+  completedTaskList.classList.add("complete-list", "hidden")
+
+  completedContainer.append(completedTitle, completedTaskList)
+
+  return { completedContainer, completedTaskList }
 }
 
 function createProjectTitle(project) {
@@ -137,36 +199,35 @@ function createTasksSection(project) {
   const tasksSection = document.createElement("div")
   tasksSection.classList.add("tasks-container")
 
-
-
-  const completedSection = createCompletedSection()
+  const { completedContainer, completedTaskList } = createCompletedSection()
 
   project.todoList.forEach(todo => {
 
-    const task = createTask(todo)
 
     if (todo.checked) {
-      completedSection.append(task)
+      completedTaskList.append(createCompletedTask(todo))
     } else {
-      tasksSection.append(task)
+      tasksSection.append(createTask(todo))
     }
 
   });
   const addTaskBtn = addTaskSection(project)
   tasksSection.append(addTaskBtn)
 
-  return { tasksSection, completedSection }
+  return { tasksSection, completedContainer }
 }
+
 
 const createProjectSection = (project) => {
   const projectTitle = createProjectTitle(project)
 
-  const { tasksSection, completedSection } = createTasksSection(project)
+  const { tasksSection, completedContainer } = createTasksSection(project)
 
+  console.log(completedContainer)
   const mainDiv = document.createElement("div")
   mainDiv.classList.add("main")
 
-  mainDiv.append(projectTitle, tasksSection, completedSection)
+  mainDiv.append(projectTitle, tasksSection, completedContainer)
 
   return mainDiv
 }
