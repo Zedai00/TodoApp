@@ -156,14 +156,37 @@ svg {
 .add-task {
   display: flex;
   font-size: 18px;
-  gap: 10px;
-  width: auto;
+  flex-direction: column;
   box-shadow: 1px 1px 2px grey;
   padding: 5px;
   cursor: pointer;
   border-radius: 5px;
-  height: 30px;
-  align-items: center;
+}
+
+.task-div {
+  display: flex;
+  gap: 10px;
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  opacity: 1;
+  max-height: 500px;
+  transition:
+    opacity 0.3s ease,
+    max-height 0.3s ease,
+    padding 0.3s ease;
+  overflow: hidden;
+}
+
+.hidden {
+  opacity: 0;
+  max-height: 0;
+  pointer-events: none;
+  padding: 0;
 }
 
 .task:hover,
@@ -185,9 +208,11 @@ svg {
   width: 25px;
 }
 
+.task-title {
+  flex: 1;
+}
 .actions {
   display: flex;
-  margin-left: auto;
   gap: 5px;
 }
 

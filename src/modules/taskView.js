@@ -15,10 +15,32 @@ function createIcon(iconName, className) {
   return iconDiv
 }
 
+function createTaskInfo(todo) {
+
+  const taskInfo = document.createElement("div")
+  taskInfo.classList.add("task-info")
+
+  const desc = document.createElement("div")
+  desc.textContent = `Description: ${todo.description}`
+
+  const dueDate = document.createElement("div")
+  dueDate.textContent = `Due Date: ${todo.dueDate || ""}`
+
+  const priority = document.createElement("div")
+  priority.textContent = ` Priority: ${todo.priority}`
+
+  taskInfo.append(desc, dueDate, priority)
+
+  return taskInfo
+}
+
 function createTask(todo) {
   const task = document.createElement("div")
   task.classList.add("task")
   task.id = todo.id
+
+  const taskDiv = document.createElement("div")
+  taskDiv.classList.add("task-div")
 
   const checkboxContainer = document.createElement("div")
   checkboxContainer.classList.add("checkbox")
@@ -30,6 +52,11 @@ function createTask(todo) {
 
   const taskTitle = document.createElement("div")
   taskTitle.textContent = todo.title
+  taskTitle.classList.add("task-title")
+
+  taskTitle.addEventListener("click", () => {
+    taskInfo.classList.toggle("hidden")
+  })
 
   const actionsDiv = document.createElement("div")
   actionsDiv.classList.add("actions")
@@ -47,7 +74,11 @@ function createTask(todo) {
 
   actionsDiv.append(editAction, deleteAction, archiveAction)
 
-  task.append(checkboxContainer, taskTitle, actionsDiv)
+  taskDiv.append(checkboxContainer, taskTitle, actionsDiv)
+  const taskInfo = createTaskInfo(todo)
+  taskInfo.classList.add("hidden")
+  task.append(taskDiv, taskInfo)
+
 
   return task
 }
@@ -73,21 +104,23 @@ function createProjectTitle(project) {
 
   const editProject = createIcon("mdi:pencil-outline", "edit-action")
   editProject.addEventListener("click", () => {
-    projectTitle.contentEditable = true
-    projectTitle.focus(HTMLOptionElement)
+    dialogModel.getTitleForm().showModal()
   })
 
   const projectTitle = document.createElement("div")
   projectTitle.textContent = project.title
 
   const deleteProject = createIcon("mdi:bin-outline", "delete-action")
+  deleteProject.addEventListener("click", () => {
+    projects.remove(projects.getCurrentProject().id)
+  })
 
   projectTitleSection.append(editProject, projectTitle, deleteProject)
 
   return projectTitleSection
 }
 
-function addTaskSection(project) {
+function addTaskSection() {
   const addTaskDiv = document.createElement("div")
   addTaskDiv.classList.add("add-task");
   addTaskDiv.textContent = "+ Add Task"

@@ -1,36 +1,63 @@
 import projects from "./projectModel";
 import render from "./render";
 
-function createTodoForm(id) {
+
+function createTitleForm(elm) {
   const form = document.createElement("form");
   form.id = "todo-form";
-
-  const createField = (labelText, inputElement) => {
-    const label = document.createElement("label");
-    label.textContent = labelText;
-    label.htmlFor = inputElement.id;
-
-    form.appendChild(label);
-    form.appendChild(inputElement);
-  };
 
   const titleInput = document.createElement("input");
   titleInput.type = "text";
   titleInput.id = "title";
   titleInput.name = "title";
   titleInput.required = true;
-  createField("Title:", titleInput);
+  titleInput.value = elm.title;
+  createField("Title:", titleInput, form);
+
+  const submitBtn = document.createElement("button");
+  submitBtn.type = "submit";
+  submitBtn.textContent = "Submit";
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault()
+    elm.title = titleInput.value
+    e.currentTarget.closest("dialog").close()
+    render()
+  })
+  form.appendChild(submitBtn);
+  return form
+}
+
+const createField = (labelText, inputElement, form) => {
+  const label = document.createElement("label");
+  label.textContent = labelText;
+  label.htmlFor = inputElement.id;
+
+  form.appendChild(label);
+  form.appendChild(inputElement);
+};
+
+function createTodoForm(id) {
+  const form = document.createElement("form");
+  form.id = "todo-form";
+
+
+  const titleInput = document.createElement("input");
+  titleInput.type = "text";
+  titleInput.id = "title";
+  titleInput.name = "title";
+  titleInput.required = true;
+  createField("Title:", titleInput, form);
 
   const descTextarea = document.createElement("textarea");
   descTextarea.id = "description";
   descTextarea.name = "description";
-  createField("Description:", descTextarea);
+  createField("Description:", descTextarea, form);
 
   const dueDateInput = document.createElement("input");
   dueDateInput.type = "datetime-local";
   dueDateInput.id = "dueDate";
   dueDateInput.name = "dueDate";
-  createField("Due Date:", dueDateInput);
+  createField("Due Date:", dueDateInput, form);
 
   const prioritySelect = document.createElement("select");
   prioritySelect.id = "priority";
@@ -42,7 +69,7 @@ function createTodoForm(id) {
     if (value === "low") option.selected = true;
     prioritySelect.appendChild(option);
   });
-  createField("Priority:", prioritySelect);
+  createField("Priority:", prioritySelect, form);
 
   const submitBtn = document.createElement("button");
   submitBtn.type = "submit";
@@ -115,6 +142,14 @@ export const dialogModel = (() => {
     return dialog
   }
 
+  const getTitleForm = () => {
+    clearDialog()
+    const project = projects.getCurrentProject()
+    const projectTitleForm = createTitleForm(project)
+    dialog.append(projectTitleForm)
+    return dialog
+  }
+
   const clearDialog = () => {
     dialog.innerHTML = ""
     dialog.append(createCloseBtn(dialog))
@@ -122,5 +157,5 @@ export const dialogModel = (() => {
 
   const getDialog = () => dialog
 
-  return { getDialog, getFormDialog }
+  return { getDialog, getFormDialog, getTitleForm }
 })();

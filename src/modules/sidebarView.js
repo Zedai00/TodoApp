@@ -28,6 +28,10 @@ function createProjectsSection(projects) {
   projects.getProjects().forEach(project => {
     const projectDiv = document.createElement("div")
     projectDiv.textContent = project.title
+    projectDiv.addEventListener("click", () => {
+      projects.setCurrentProject(project.id)
+      render()
+    })
     projectListDiv.append(projectDiv)
   })
 

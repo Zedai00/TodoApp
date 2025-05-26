@@ -49,6 +49,7 @@ const projectModel = (() => {
       } else
         projectList.splice(index, 1);
     }
+    render()
   };
 
   const setCurrentProject = (projectId) => {
