@@ -1,3 +1,4 @@
+import { dialogModel } from "./dialogModel.js"
 import render from "./render.js"
 
 function createUserInfo(user) {
@@ -41,7 +42,7 @@ function createProjectsSection(projects) {
   return projectsDiv
 }
 
-function addProject(projects) {
+function addProject() {
   const addProjectButton = document.createElement("div")
   addProjectButton.textContent = "+"
 
@@ -50,25 +51,14 @@ function addProject(projects) {
   addProjectButtonDiv.append(addProjectButton)
 
   addProjectButton.addEventListener("click", () => {
-    const title = prompt()
-    projects.add(title)
-    render(projects)
+    dialogModel.getAddProjectTitleForm().showModal()
+    // render(projects)
   })
 
   return addProjectButtonDiv
 }
 
 
-function createArchiveSection() {
-  const archiveContainer = document.createElement("div")
-  archiveContainer.classList.add("archive")
-
-  const archiveLabel = document.createElement("div")
-  archiveLabel.textContent = "Archive"
-
-  archiveContainer.append(archiveLabel)
-  return archiveContainer
-}
 
 const createSidebar = (projects, user = "User") => {
   const sidebarContainer = document.createElement("div")
@@ -76,10 +66,9 @@ const createSidebar = (projects, user = "User") => {
 
   const userInfo = createUserInfo(user)
   const projectsSection = createProjectsSection(projects)
-  const archiveSection = createArchiveSection()
 
 
-  sidebarContainer.append(userInfo, projectsSection, archiveSection)
+  sidebarContainer.append(userInfo, projectsSection)
   return sidebarContainer
 }
 

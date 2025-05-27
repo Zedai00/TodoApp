@@ -150,6 +150,14 @@ export const dialogModel = (() => {
     return dialog
   }
 
+  const getAddProjectTitleForm = () => {
+    clearDialog()
+    const project = projects.add("New Project")
+    const projectTitleForm = createTitleForm(project)
+    dialog.append(projectTitleForm)
+    return dialog
+  }
+
   const clearDialog = () => {
     dialog.innerHTML = ""
     dialog.append(createCloseBtn(dialog))
@@ -157,5 +165,5 @@ export const dialogModel = (() => {
 
   const getDialog = () => dialog
 
-  return { getDialog, getFormDialog, getTitleForm }
+  return { getDialog, getFormDialog, getTitleForm, getAddProjectTitleForm }
 })();

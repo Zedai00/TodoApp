@@ -77,9 +77,8 @@ function createTask(todo) {
     const todoId = e.currentTarget.closest('.task').id
     projects.getCurrentProject().remove(todoId)
   })
-  const archiveAction = createIcon("tabler:archive", "archive-action")
 
-  actionsDiv.append(editAction, deleteAction, archiveAction)
+  actionsDiv.append(editAction, deleteAction)
 
   taskDiv.append(checkboxContainer, taskTitle, actionsDiv)
   const taskInfo = createTaskInfo(todo)
@@ -122,9 +121,9 @@ function createCompletedTask(todo) {
     const todoId = e.currentTarget.closest('.task').id
     projects.getCurrentProject().remove(todoId)
   })
-  const archiveAction = createIcon("tabler:archive", "archive-action")
 
-  actionsDiv.append(deleteAction, archiveAction)
+
+  actionsDiv.append(deleteAction)
 
   taskDiv.append(checkboxContainer, taskTitle, actionsDiv)
   const taskInfo = createTaskInfo(todo)
@@ -139,13 +138,13 @@ function createCompletedSection() {
   const completedContainer = document.createElement("div")
   completedContainer.classList.add("completed")
 
-  completedContainer.addEventListener("click", () => {
-    completedTaskList.classList.toggle("hidden")
-    arrow.classList.toggle("rotated");
-  })
 
   const completedTitle = document.createElement("div")
   completedTitle.classList.add("completed-title")
+  completedTitle.addEventListener("click", () => {
+    completedTaskList.classList.toggle("hidden")
+    arrow.classList.toggle("rotated");
+  })
 
   const arrow = createIcon("mdi:chevron-down", "arrow");
   completedTitle.appendChild(arrow);
