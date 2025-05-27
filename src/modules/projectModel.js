@@ -1,7 +1,7 @@
 import render from "./render";
 import createTodo from "./todoModel";
 
-const project = (title) => {
+const projectModel = (title) => {
   const id = crypto.randomUUID();
   const todoList = [];
 
@@ -27,12 +27,12 @@ const project = (title) => {
   return { id, title, todoList, add, remove, getTodo };
 };
 
-const projectModel = (() => {
-  const projectList = [];
+const projects = (() => {
+  let projectList = [];
   let currentProject = null;
 
   const add = (title) => {
-    const newProject = project(title);
+    const newProject = projectModel(title);
     projectList.push(newProject);
     if (!currentProject) {
       currentProject = newProject
@@ -61,9 +61,14 @@ const projectModel = (() => {
 
   const getCurrentProject = () => currentProject;
 
+
   const getProjects = () => projectList;
 
-  return { getProjects, add, remove, setCurrentProject, getCurrentProject };
+  const setProjects = (projects) => {
+    projectList = projects
+  }
+
+  return { getProjects, add, remove, setCurrentProject, getCurrentProject, setProjects };
 })();
 
-export default projectModel;
+export { projects, projectModel };

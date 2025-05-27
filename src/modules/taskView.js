@@ -1,5 +1,5 @@
 import { dialogModel } from "./dialogModel"
-import projects from "./projectModel"
+import { projects } from "./projectModel"
 import render from "./render"
 
 
@@ -70,6 +70,7 @@ function createTask(todo) {
 
   const editAction = createIcon("mdi:pencil-outline", "edit-action")
   editAction.addEventListener("click", (e) => {
+
     dialogModel.getFormDialog(e.currentTarget.closest(".task").id).showModal();
   })
   const deleteAction = createIcon("mdi:bin-outline", "delete-action")
@@ -164,6 +165,7 @@ function createProjectTitle(project) {
   projectTitleSection.classList.add("project-title")
 
   const editProject = createIcon("mdi:pencil-outline", "edit-action")
+
   editProject.addEventListener("click", () => {
     dialogModel.getTitleForm().showModal()
   })
@@ -222,7 +224,6 @@ const createProjectSection = (project) => {
 
   const { tasksSection, completedContainer } = createTasksSection(project)
 
-  console.log(completedContainer)
   const mainDiv = document.createElement("div")
   mainDiv.classList.add("main")
 

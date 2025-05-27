@@ -1,4 +1,4 @@
-import projects from "./projectModel";
+import { projects } from "./projectModel";
 import render from "./render";
 
 
@@ -81,6 +81,7 @@ function createTodoForm(id) {
     render()
   })
   form.appendChild(submitBtn);
+
   if (id) {
     editForm(id, titleInput, descTextarea, dueDateInput, prioritySelect);
   }
@@ -98,6 +99,7 @@ function saveTodo(id, title, desc, dueDate, priority) {
     console.log("h")
     render()
   } else {
+    console.log(projects.getCurrentProject())
     projects.getCurrentProject().add(title, desc, dueDate, priority)
     render()
   }
